@@ -1,32 +1,22 @@
 from LinguagemFactory import LinguagemFactory
-from Idiomas import Idioma
+from Familias import Familia
 
-# Configurando o autômato para o idioma escolhido
-def configurar_linguagem(idioma_escolhido):
-    return LinguagemFactory.get_linguagem(idioma_escolhido)
+# Configurando o autômato para a família de escrita escolhida
+def configurar_linguagem(familia_escolhida):
+    return LinguagemFactory.get_linguagem(familia_escolhida)
 
-# Função para processar a cadeia e identificar o idioma
-def processar_cadeia(linguagem, cadeia):
-    estado_atual = linguagem.estado_inicial
-    for simbolo in cadeia:
-        if (estado_atual, simbolo) in linguagem.transicoes:
-            estado_atual = linguagem.transicoes[(estado_atual, simbolo)]
-        else:
-            return None  # Não reconhecido
-    return estado_atual in linguagem.estados_finais  # Retorna True se aceito
+# Input da palavra
+palavra = input("Digite uma palavra para identificar a família de escrita: ").strip()
+familias = [Familia.LATINO, Familia.CIRILICO, Familia.ARABE, Familia.GREGO, Familia.CJK]
+resultados = {}
 
-# Teste com uma entrada
-palavra = "gracias"
-idiomas = [Idioma.ESPANHOL, Idioma.INGLES, Idioma.FRANCES, Idioma.PORTUGUES]
-reconhecido = False
+# Calcula a pontuação de cada família de escrita para a palavra inserida
+for familia in familias:
+    linguagem = configurar_linguagem(familia)
+    pontuacao = linguagem.calcular_pontuacao(palavra)
+    resultados[familia.value] = pontuacao
 
-for idioma in idiomas:
-    linguagem = configurar_linguagem(idioma)
-    if processar_cadeia(linguagem, palavra):
-        print(f"A palavra '{palavra}' foi reconhecida como pertencente ao idioma: {idioma.value}.")
-        reconhecido = True
-        break
+# Identificar a família de escrita com a maior pontuação
+familia_reconhecida = max(resultados, key=resultados.get)
 
-if not reconhecido:
-    print(f"A palavra '{palavra}' não foi reconhecida por nenhum idioma.")
-
+print(f"A palavra '{palavra}' foi identificada como pertencente à família de escrita: {familia_reconhecida}.")

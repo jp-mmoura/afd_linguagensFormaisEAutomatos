@@ -1,20 +1,17 @@
-# Linguagem.py
 from abc import ABC, abstractmethod
 
 class Linguagem(ABC):
     def __init__(self):
-        self.estados = ['q0', 'qf']
-        self.transicoes = self.configurar_transicoes()
         self.alfabeto = self.configurar_alfabeto()
-        self.estado_inicial = 'q0'
-        self.estados_finais = ['qf']
     
     @abstractmethod
     def configurar_alfabeto(self):
-        """Define o alfabeto da linguagem específica."""
+        """Define o alfabeto da família de idiomas."""
         pass
 
-    @abstractmethod
-    def configurar_transicoes(self):
-        """Define as transições da linguagem específica."""
-        pass
+    def calcular_pontuacao(self, palavra):
+        """Verifica se todos os caracteres da palavra estão exclusivamente no alfabeto."""
+        palavra_filtrada = ''.join(letra.lower() for letra in palavra if letra.isalpha())  # Ignora espaços e símbolos, usa minúsculas
+        if all(letra in self.alfabeto for letra in palavra_filtrada):  # Todos os caracteres devem estar no alfabeto
+            return len(palavra_filtrada)  # Retorna uma pontuação proporcional ao comprimento da palavra
+        return 0  # Retorna 0 se algum caractere não estiver no alfabeto

@@ -1,20 +1,22 @@
-# LinguagemFactory.py
-from Idiomas import Idioma
-from idiomas.Espanhol import Espanhol
-from idiomas.Ingles import Ingles
-from idiomas.Frances import Frances
-from idiomas.Portugues import Portugues
+from Familias import Familia
+from linguas.Latino import Latino
+from linguas.Cirilico import Cirilico
+from linguas.Arabe import Arabe
+from linguas.Grego import Grego
+from linguas.CJK import CJK
 
 class LinguagemFactory:
     @staticmethod
-    def get_linguagem(idioma: Idioma):
-        if idioma == Idioma.ESPANHOL:
-            return Espanhol()
-        elif idioma == Idioma.INGLES:
-            return Ingles()
-        elif idioma == Idioma.FRANCES:
-            return Frances()
-        elif idioma == Idioma.PORTUGUES:
-            return Portugues()
+    def get_linguagem(familia: Familia):
+        if familia == Familia.LATINO:
+            return Latino()
+        elif familia == Familia.CIRILICO:
+            return Cirilico()
+        elif familia == Familia.ARABE:
+            return Arabe()
+        elif familia == Familia.GREGO:
+            return Grego()
+        elif familia == Familia.CJK:
+            return CJK()
         else:
-            raise ValueError("Idioma não suportado.")
+            raise ValueError("Família de idioma não suportada.")
