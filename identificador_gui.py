@@ -14,36 +14,30 @@ def verificar_familia():
     # Processamento da verificação da palavra
     palavra = entrada.get().strip()
     familias = [Familia.LATINO, Familia.CIRILICO, Familia.ARABE, Familia.GREGO, Familia.CJK]
-    resultados = {}
+    familias_detectadas = set()
 
+    # Testa a palavra em cada família de escrita usando o autômato
     for familia in familias:
         linguagem = LinguagemFactory.get_linguagem(familia)
-        pontuacao = linguagem.calcular_pontuacao(palavra)
-        resultados[familia.value] = pontuacao
+        if linguagem.processar_palavra(palavra):
+            familias_detectadas.add(familia.value)
 
-    # Identifica a família com a maior pontuação
-    familia_reconhecida = max(resultados, key=resultados.get)
-    exibir_resultado(familia_reconhecida, palavra)
+    # Verifica se mais de uma família foi detectada e exibe o resultado
+    if len(familias_detectadas) > 1:
+        resultado_texto.set(f"Erro: A palavra '{palavra}' contém caracteres de mais de uma família: {', '.join(familias_detectadas)}.")
+    elif familias_detectadas:
+        familia_detectada = familias_detectadas.pop()
+        resultado_texto.set(f"A palavra '{palavra}' foi identificada como pertencente à família de escrita: {familia_detectada}.")
+    else:
+        resultado_texto.set(f"A palavra '{palavra}' não foi reconhecida por nenhuma família de escrita.")
 
     # Restaura o estado original do botão após o carregamento
     botao_verificar.config(state="normal", text="Verificar Família")
 
-# Função para exibir o resultado com bandeiras representativas
-def exibir_resultado(familia, palavra):
-    # Dicionário com múltiplas bandeiras para cada família de escrita
-    emojis = {
-        "latino": "🇧🇷 🇺🇸 🇫🇷 🇪🇸 🇵🇹 🇮🇹 🇩🇪",   # Brasil, EUA, França, Espanha, Portugal, Itália, Alemanha
-        "cirilico": "🇷🇺 🇧🇾 🇺🇦 🇰🇿 🇧🇬 🇲🇰 🇷🇸",  # Rússia, Belarus, Ucrânia, Cazaquistão, Bulgária, Macedônia, Sérvia
-        "arabe": "🇸🇦 🇪🇬 🇦🇪 🇮🇶 🇲🇦 🇩🇿 🇹🇳",     # Arábia Saudita, Egito, Emirados, Iraque, Marrocos, Argélia, Tunísia
-        "grego": "🇬🇷 🇨🇾",                     # Grécia, Chipre
-        "cjk": "🇨🇳 🇯🇵 🇰🇷"                     # China, Japão, Coreia do Sul
-    }
-    resultado_texto.set(f"{emojis.get(familia, '')} A palavra '{palavra}' foi identificada como {familia.capitalize()}")
-
 # Configuração da interface gráfica
 root = ttk.Window(themename="flatly")  # Tema claro para visual moderno
 root.title("Identificador de Família de Escrita")
-root.geometry("600x400")
+root.geometry("800x600")
 root.configure(bg="#F7F7F7")  # Fundo cinza claro
 
 # Título

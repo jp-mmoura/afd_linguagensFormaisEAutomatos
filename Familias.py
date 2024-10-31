@@ -5,4 +5,4 @@ class Familia(Enum):
     CIRILICO = 'cirilico'
     ARABE = 'arabe'
     GREGO = 'grego'
-    CJK = 'cjk'  # Chinês/Japonês/Coreano
+    CJK = 'cjk'

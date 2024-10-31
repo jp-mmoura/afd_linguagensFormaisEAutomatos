@@ -7,16 +7,16 @@ from linguas.CJK import CJK
 
 class LinguagemFactory:
     @staticmethod
-    def get_linguagem(familia: Familia):
-        if familia == Familia.LATINO:
+    def get_linguagem(idioma: Familia):
+        if idioma == Familia.LATINO:
             return Latino()
-        elif familia == Familia.CIRILICO:
+        elif idioma == Familia.CIRILICO:
             return Cirilico()
-        elif familia == Familia.ARABE:
+        elif idioma == Familia.ARABE:
             return Arabe()
-        elif familia == Familia.GREGO:
+        elif idioma == Familia.GREGO:
             return Grego()
-        elif familia == Familia.CJK:
+        elif idioma == Familia.CJK:
             return CJK()
         else:
-            raise ValueError("Família de idioma não suportada.")
+            raise ValueError("Idioma não suportado.")
