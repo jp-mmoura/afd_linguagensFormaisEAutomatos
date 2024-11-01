@@ -1,32 +1,25 @@
 from LinguagemFactory import LinguagemFactory
-from Idiomas import Idioma
+from Familias import Familia
 
-# Configurando o autômato para o idioma escolhido
-def configurar_linguagem(idioma_escolhido):
-    return LinguagemFactory.get_linguagem(idioma_escolhido)
+def identificar_familia(palavra):
+    familias = [Familia.GREGO, Familia.CIRILICO, Familia.ARABE, Familia.CJK, Familia.LATINO]
+    familias_detectadas = set()
 
-# Função para processar a cadeia e identificar o idioma
-def processar_cadeia(linguagem, cadeia):
-    estado_atual = linguagem.estado_inicial
-    for simbolo in cadeia:
-        if (estado_atual, simbolo) in linguagem.transicoes:
-            estado_atual = linguagem.transicoes[(estado_atual, simbolo)]
-        else:
-            return None  # Não reconhecido
-    return estado_atual in linguagem.estados_finais  # Retorna True se aceito
+    # Testa a palavra em cada família de escrita usando o autômato
+    for familia in familias:
+        linguagem = LinguagemFactory.get_linguagem(familia)
+        if linguagem.processar_palavra(palavra):
+            familias_detectadas.add(familia.value)
+
+    # Verifica se mais de uma família foi detectada
+    if len(familias_detectadas) > 1:
+        print(f"Erro: A palavra '{palavra}' contém caracteres de mais de uma família de escrita: {', '.join(familias_detectadas)}.")
+    elif familias_detectadas:
+        familia_detectada = familias_detectadas.pop()
+        print(f"A palavra '{palavra}' foi identificada como pertencente à família de escrita: {familia_detectada}.")
+    else:
+        print(f"A palavra '{palavra}' não foi reconhecida por nenhuma família de escrita.")
 
 # Teste com uma entrada
-palavra = "gracias"
-idiomas = [Idioma.ESPANHOL, Idioma.INGLES, Idioma.FRANCES, Idioma.PORTUGUES]
-reconhecido = False
-
-for idioma in idiomas:
-    linguagem = configurar_linguagem(idioma)
-    if processar_cadeia(linguagem, palavra):
-        print(f"A palavra '{palavra}' foi reconhecida como pertencente ao idioma: {idioma.value}.")
-        reconhecido = True
-        break
-
-if not reconhecido:
-    print(f"A palavra '{palavra}' não foi reconhecida por nenhum idioma.")
-
+palavra = input("Digite uma palavra para identificar a família de escrita: ")
+identificar_familia(palavra)
