@@ -2,7 +2,10 @@ from LinguagemFactory import LinguagemFactory
 from Familias import Familia
 
 def identificar_familia(palavra):
-    familias = [Familia.GREGO, Familia.CIRILICO, Familia.ARABE, Familia.CJK, Familia.LATINO]
+    familias = [
+        Familia.GREGO, Familia.CIRILICO, Familia.ARABE, Familia.CJK,
+        Familia.LATINO, Familia.ASSEMBLY, Familia.JAVA, Familia.JAVASCRIPT, Familia.PYTHON
+    ]
     familias_detectadas = set()
 
     # Testa a palavra em cada família de escrita usando o autômato
@@ -23,3 +26,4 @@ def identificar_familia(palavra):
 # Teste com uma entrada
 palavra = input("Digite uma palavra para identificar a família de escrita: ")
 identificar_familia(palavra)
+
