@@ -6,3 +6,9 @@ class Familia(Enum):
     ARABE = 'arabe'
     GREGO = 'grego'
     CJK = 'cjk'
+    ASSEMBLY = 'assembly'
+    JAVA = 'java'
+    JAVASCRIPT = 'javascript'
+    PYTHON = 'python'
+
+    

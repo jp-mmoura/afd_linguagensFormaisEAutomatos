@@ -4,6 +4,11 @@ from linguas.Cirilico import Cirilico
 from linguas.Arabe import Arabe
 from linguas.Grego import Grego
 from linguas.CJK import CJK
+from linguas.Assembly import Assembly
+from linguas.Java import Java
+from linguas.JavaScript import JavaScript
+from linguas.Python import Python
+
 
 class LinguagemFactory:
     @staticmethod
@@ -18,5 +23,13 @@ class LinguagemFactory:
             return Grego()
         elif idioma == Familia.CJK:
             return CJK()
+        elif idioma == Familia.ASSEMBLY:
+            return Assembly()
+        elif idioma == Familia.JAVA:
+            return Java()
+        elif idioma == Familia.JAVASCRIPT:
+            return JavaScript()
+        elif idioma == Familia.PYTHON:
+            return Python()
         else:
             raise ValueError("Idioma não suportado.")
