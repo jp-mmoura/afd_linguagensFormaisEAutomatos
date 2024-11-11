@@ -1,0 +1,81 @@
+Python: 
+def calcular_soma(a, b):
+    return a + b
+
+print(calcular_soma(5, 10))
+
+Java: 
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+
+JavaScript: 
+function greet(name) {
+    console.log("Hello, " + name + "!");
+}
+
+greet("Alice");
+
+
+Assembly: 
+section .data
+    msg db 'Hello, World!', 0
+
+section .text
+    global _start
+
+_start:
+    ; Write the message to stdout
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, msg
+    mov edx, 13
+    int 0x80
+
+    ; Exit the program
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80
+
+C/C++:
+
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+
+
+Latino:
+
+"libro" (Espanhol, significa "livro")
+"amor" (Português/Espanhol, significa "amor")
+"sagaz" (Português, significa "perspicaz")
+
+Cirílico:
+
+"мир" (Russo, significa "paz")
+"любовь" (Russo, significa "amor")
+"добро" (Búlgaro, significa "bondade")
+
+Grego:
+
+"αγάπη" (Grego, significa "amor")
+"καλός" (Grego, significa "bom")
+"ειρήνη" (Grego, significa "paz")
+
+Árabe:
+
+"حب" (Árabe, significa "amor")
+"كتاب" (Árabe, significa "livro")
+"سلام" (Árabe, significa "paz")
+
+CJK:
+
+"愛" (Japonês, significa "amor")
+"平和" (Chinês/Japonês, significa "paz")
+"친구" (Coreano, significa "amigo")
