@@ -40,15 +40,6 @@ _start:
     xor ebx, ebx
     int 0x80
 
-C/C++:
-
-#include <stdio.h>
-
-int main() {
-    printf("Hello, World!\n");
-    return 0;
-}
-
 
 Latino:
 
