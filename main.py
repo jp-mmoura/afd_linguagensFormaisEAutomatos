@@ -2,6 +2,9 @@ from LinguagemFactory import LinguagemFactory
 from Familias import Familia
 
 def identificar_familia(palavra):
+    # Remover espaços da palavra/frase
+    palavra = palavra.replace(" ", "")
+    
     familias = [
         Familia.GREGO, Familia.CIRILICO, Familia.ARABE, Familia.CJK,
         Familia.LATINO, Familia.ASSEMBLY, Familia.JAVA, Familia.JAVASCRIPT, Familia.PYTHON
@@ -24,6 +27,5 @@ def identificar_familia(palavra):
         print(f"A palavra '{palavra}' não foi reconhecida por nenhuma família de escrita.")
 
 # Teste com uma entrada
-palavra = input("Digite uma palavra para identificar a família de escrita: ")
+palavra = input("Digite uma palavra ou frase para identificar a família de escrita: ")
 identificar_familia(palavra)
-
